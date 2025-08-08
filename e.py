@@ -25,54 +25,42 @@ from random import choice as cc
 from random import randrange as rr
 
 white = "\033[1;37m"
-from colorama import Fore, Style, init
+class colors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
-init(autoreset=True)
 
-def clear():
-    os.system('cls' if os.name == 'nt' else 'clear')
+PST = "https://pastebin.com/raw/L7Z7NX7P"
+MYC = "https://t.me/boloradhey"  
 
-clear()
-print(f"{Fore.CYAN}{Style.BRIGHT}😾 𝐩𝐚𝐢𝐝 𝐚𝐜𝐜𝐞𝐬𝐬 𝐬𝐲𝐬𝐭𝐞𝐦.!\n")
+def IRONMAN():
+    try:
+        response = requests.get(PST, timeout=5)
+        if response.status_code == 200:
+            content = response.text.strip().upper()
+            return content == "RADHEY"
+        return False
+    except Exception as e:
+        return True  
 
-ID = input(f"{Fore.YELLOW}ENTER CHAT ID {Fore.RESET}").strip()
+def titanic():
+    print(f"\n{colors.FAIL}⛔ Tool is currently Turned OFF by developer{colors.ENDC}")
+    print(f"{colors.WARNING} JOIN OUR CHANNEL FOR MORE...... {colors.ENDC}")
+    webbrowser.open(MYC)
+    sys.exit(1)
 
-try:
-    response = requests.get("https://raw.githubusercontent.com/wasradhey/Expiry/refs/heads/main/expiry.txt")
-    response.raise_for_status()
-    valid_lines = response.text.splitlines()
-except requests.RequestException:
-    print(f"{Fore.RED}⚠️ 𝐅𝐚𝐢𝐥𝐞𝐝 𝐭𝐨 𝐜𝐡𝐞𝐜𝐤 𝐚𝐜𝐜𝐞𝐬𝐬. 𝐜𝐡𝐞𝐜𝐤 𝐲𝐨𝐮𝐫 𝐢𝐧𝐭𝐞𝐫𝐧𝐞𝐭 𝐜𝐨𝐧𝐧𝐞𝐜𝐭𝐢𝐨𝐧.")
-    os._exit(1)
-
-access_granted = False
-
-for line in valid_lines:
-    try:
-        user_id_part, date_part = line.split(',', 1)
-        user_id_part = user_id_part.strip()
-        date_time_str = date_part.strip()  # e.g., '2025-08-11 : 22:22'
-
-        if ID == user_id_part:
-            expiry_datetime = datetime.strptime(date_time_str, "%Y-%m-%d : %H:%M")
-            current_datetime = datetime.now()
-
-            if current_datetime <= expiry_datetime:
-                print(f"{Fore.GREEN}✅ 𝐀𝐜𝐜𝐞𝐬𝐬 𝐠𝐫𝐚𝐧𝐭𝐞𝐝. 𝐰𝐞𝐥𝐜𝐨𝐦𝐞 𝐩𝐫𝐞𝐦𝐢𝐮𝐦 𝐮𝐬𝐞𝐫 ✨")
-                access_granted = True
-            else:
-                print(f"{Fore.RED}❌ 𝐘𝐨𝐮𝐫 𝐬𝐮𝐛𝐬𝐜𝐫𝐢𝐩𝐭𝐢𝐨𝐧 𝐞𝐱𝐩𝐢𝐫𝐞𝐝 𝐨𝐧 {expiry_datetime.strftime('%Y-%m-%d %H:%M')}.")
-            break
-    except Exception as e:
-        pass  # silently skip any error
-
-if not access_granted:
-    print(f"{Fore.RED}❌ 𝐀𝐜𝐜𝐞𝐬𝐬 𝐝𝐞𝐧𝐢𝐞𝐝 𝐜𝐨𝐧𝐭𝐚𝐜𝐭 @boloradhey 𝐟𝐨𝐫 𝐬𝐮𝐛𝐬𝐜𝐫𝐢𝐛𝐢𝐭𝐨𝐧.")
-    sleep(2)
-    os._exit(0)
-
-print(f"{Fore.CYAN}\n🚀 𝐋𝐨𝐚𝐝𝐢𝐧𝐠 𝐲𝐨𝐮𝐫 𝐩𝐫𝐞𝐦𝐢𝐮𝐦 𝐭𝐨𝐨𝐥 𝐰𝐚𝐢𝐭.\n")
-sleep(1)
+def main():
+    if not IRONMAN():
+        titanic()
+                
+if __name__ == "__main__":
+    main()
 def random_color():
     return random.choice(['magenta','cyan','yellow','red','blue','green'])
 
